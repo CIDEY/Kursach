@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище u1255664_testdriveModel" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="45" />
+          <Property Name="password" Type="varchar" MaxLength="45" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" />
+          <Property Name="age" Type="int" />
+          <Property Name="rent_a_car" Type="int" />
+        </EntityType>
+        <EntityType Name="cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_car" Type="varchar" MaxLength="45" />
+          <Property Name="hp" Type="int" />
+          <Property Name="model" Type="varchar" MaxLength="45" />
+          <Property Name="status" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_car" />
+            <PropertyRef Name="id_account" />
+          </Key>
+          <Property Name="id_car" Type="int" Nullable="false" />
+          <Property Name="id_account" Type="int" Nullable="false" />
+          <Property Name="time" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <Association Name="car_id_FK">
+          <End Role="cars" Type="Self.cars" Multiplicity="0..1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="rent_a_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_acc_FK_orders">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_car_FK_orders">
+          <End Role="cars" Type="Self.cars" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище u1255664_testdriveModelContainer">
+          <EntitySet Name="accounts" EntityType="Self.accounts" Schema="" store:Type="Tables" />
+          <EntitySet Name="cars" EntityType="Self.cars" Schema="" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="" store:Type="Tables" />
+          <AssociationSet Name="car_id_FK" Association="Self.car_id_FK">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="id_acc_FK_orders" Association="Self.id_acc_FK_orders">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="id_car_FK_orders" Association="Self.id_car_FK_orders">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="u1255664_testdriveModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <NavigationProperty Name="car" Relationship="Self.car_id_FK" FromRole="accounts" ToRole="cars" />
+          <NavigationProperty Name="orders" Relationship="Self.id_acc_FK_orders" FromRole="accounts" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCar" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Hp" Type="Int32" />
+          <Property Name="Model" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="accounts" Relationship="Self.car_id_FK" FromRole="cars" ToRole="accounts" />
+          <NavigationProperty Name="orders" Relationship="Self.id_car_FK_orders" FromRole="cars" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IdCar" />
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdCar" Type="Int32" Nullable="false" />
+          <Property Name="IdAccount" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="Time" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.id_acc_FK_orders" FromRole="orders" ToRole="accounts" />
+          <NavigationProperty Name="car" Relationship="Self.id_car_FK_orders" FromRole="orders" ToRole="cars" />
+        </EntityType>
+        <Association Name="car_id_FK">
+          <End Role="cars" Type="u1255664_testdriveModel.Car" Multiplicity="0..1" />
+          <End Role="accounts" Type="u1255664_testdriveModel.Account" Multiplicity="*" />
+        </Association>
+        <Association Name="id_acc_FK_orders">
+          <End Role="accounts" Type="u1255664_testdriveModel.Account" Multiplicity="1" />
+          <End Role="orders" Type="u1255664_testdriveModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="IdAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_car_FK_orders">
+          <End Role="cars" Type="u1255664_testdriveModel.Car" Multiplicity="1" />
+          <End Role="orders" Type="u1255664_testdriveModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="IdCar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="u1255664_testdriveEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts1" EntityType="u1255664_testdriveModel.Account" />
+          <EntitySet Name="Cars1" EntityType="u1255664_testdriveModel.Car" />
+          <EntitySet Name="Orders1" EntityType="u1255664_testdriveModel.Order" />
+          <AssociationSet Name="car_id_FK" Association="Self.car_id_FK">
+            <End Role="cars" EntitySet="Cars1" />
+            <End Role="accounts" EntitySet="Accounts1" />
+          </AssociationSet>
+          <AssociationSet Name="id_acc_FK_orders" Association="Self.id_acc_FK_orders">
+            <End Role="accounts" EntitySet="Accounts1" />
+            <End Role="orders" EntitySet="Orders1" />
+          </AssociationSet>
+          <AssociationSet Name="id_car_FK_orders" Association="Self.id_car_FK_orders">
+            <End Role="cars" EntitySet="Cars1" />
+            <End Role="orders" EntitySet="Orders1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище u1255664_testdriveModelContainer" CdmEntityContainer="u1255664_testdriveEntities">
+          <EntitySetMapping Name="Accounts1">
+            <EntityTypeMapping TypeName="u1255664_testdriveModel.Account">
+              <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="Login" ColumnName="login" />
+                <ScalarProperty Name="Password" ColumnName="password" />
+                <ScalarProperty Name="FirstName" ColumnName="first_name" />
+                <ScalarProperty Name="LastName" ColumnName="last_name" />
+                <ScalarProperty Name="Age" ColumnName="age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars1">
+            <EntityTypeMapping TypeName="u1255664_testdriveModel.Car">
+              <MappingFragment StoreEntitySet="cars">
+                <ScalarProperty Name="Id" ColumnName="id" />
+                <ScalarProperty Name="NameCar" ColumnName="name_car" />
+                <ScalarProperty Name="Hp" ColumnName="hp" />
+                <ScalarProperty Name="Model" ColumnName="model" />
+                <ScalarProperty Name="Status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders1">
+            <EntityTypeMapping TypeName="u1255664_testdriveModel.Order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="IdCar" ColumnName="id_car" />
+                <ScalarProperty Name="IdAccount" ColumnName="id_account" />
+                <ScalarProperty Name="Time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="car_id_FK" TypeName="u1255664_testdriveModel.car_id_FK" StoreEntitySet="accounts">
+            <EndProperty Name="cars">
+              <ScalarProperty Name="Id" ColumnName="rent_a_car" />
+            </EndProperty>
+            <EndProperty Name="accounts">
+              <ScalarProperty Name="Id" ColumnName="id" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="rent_a_car" />
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

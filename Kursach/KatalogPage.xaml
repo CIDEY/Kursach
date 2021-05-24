@@ -1,0 +1,65 @@
+﻿<Page x:Class="Kursach.KatalogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Kursach"
+      mc:Ignorable="d" 
+      d:DesignHeight="600"
+      d:DesignWidth="1024"
+      Title="KatalogPage">
+
+    <StackPanel Background="White">
+        <StackPanel Orientation="Horizontal"
+                    MinHeight="45">
+
+            <TextBox MinHeight="1" 
+                     Height="25" 
+                     Width="105" 
+                     Margin="20, 3, 0, 3" 
+                     BorderBrush="#8F22EE" 
+                     BorderThickness="1.5">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius"
+                                Value="7"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Button Height="25"
+                    Width="25"
+                    Margin="5,0,0,-1"
+                    BorderBrush="#8F22EE"
+                    Background="#8F22EE">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                           <Setter Property="CornerRadius"
+                                   Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <StackPanel Height = "45"  
+                        Width = "212"
+                        Margin = "655,0,0,0"
+                        HorizontalAlignment = "Right">
+
+                <ComboBox VerticalAlignment="Center"
+                          HorizontalAlignment="Center" 
+                          Margin="0,10,0,0" 
+                          Width="150">
+                    <TextBlock>По названию</TextBlock>
+                    <TextBlock>По л.с.</TextBlock>
+                    <TextBlock>По состоянию</TextBlock>
+                </ComboBox>
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel Orientation="Vertical" 
+                    Height="555">
+
+            <ListView/>
+
+        </StackPanel>
+    </StackPanel>
+</Page>

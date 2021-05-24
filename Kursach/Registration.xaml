@@ -1,0 +1,120 @@
+﻿<Window x:Class="Kursach.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursach"
+        mc:Ignorable="d"
+        Title="Registration" 
+        Height="600" 
+        Width="550"
+        ResizeMode="NoResize">
+
+
+
+    <StackPanel>
+
+        <StackPanel Height="60"
+                    VerticalAlignment="Top"
+                    Background="#8F22EE">
+
+            <Label Content="REGISTRATION"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="10"
+                   FontSize="20"
+                   Foreground="#ffff" 
+                   FontFamily="Segoe UI Black"/>
+
+        </StackPanel>
+
+        <StackPanel MinHeight="400">
+
+            <Label Content="LOGIN"
+                   FontSize="18"
+                   FontFamily="Segoe UI Black"
+                   Foreground="#8F22EE"
+                   Margin="118,40,0,9"/>
+            <TextBox MinHeight="1" 
+                     Height="24" 
+                     Width="310"
+                     BorderBrush="#8F22EE" 
+                     BorderThickness="1.5" 
+                     Margin="109,-10,109,0"
+                     x:Name="textBoxLogin">
+                
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius"
+                                Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Label Content="PASSWORD"
+                   FontSize="18"
+                   FontFamily="Segoe UI Black"
+                   Foreground="#8F22EE"
+                   Margin="118,70,0,9"/>
+
+            <TextBox x:Name="passBox"
+                     MinHeight="1" 
+                     Height="24" 
+                     Width="310"
+                     BorderBrush="#8F22EE" 
+                     BorderThickness="1.5" 
+                     Margin="-100,-10,-100,0">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius"
+                                Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Label Content="AGAIN PASSWORD"
+                   FontSize="18"
+                   FontFamily="Segoe UI Black"
+                   Foreground="#8F22EE"
+                   Margin="118,70,0,9"/>
+
+            <TextBox x:Name="passBoxAgain"
+                     MinHeight="1" 
+                     Height="24" 
+                     Width="310"
+                     BorderBrush="#8F22EE" 
+                     BorderThickness="1.5" 
+                     Margin="-100,-10,-100,0">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius"
+                                Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+
+            <Button Height="40"
+                    Width="100"
+                    BorderBrush="#fff"
+                    Background="#8F22EE"
+                    Margin="220,0,0,0"
+                    Content="REGISTER"
+                    Foreground="#FFF"
+                    FontSize="11"
+                    FontFamily="Segoe UI Black"
+                    Click="Button_Reg_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius"
+                                Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        
+    </StackPanel>
+</Window>

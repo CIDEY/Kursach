@@ -1,0 +1,11 @@
+﻿<Application x:Class="Kursach.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Kursach"
+             StartupUri="KatalogPage.xaml">
+    <Application.Resources>
+        <Color x:Key="mainColor">#8F22EE</Color>
+        <FontFamily x:Key="SquadaOneRegular">SquadaOneRegular.ttf</FontFamily>
+        <FontFamily x:Key="FredokaOneRegular">FredokaOneRegular.ttf</FontFamily>
+    </Application.Resources>
+</Application>
